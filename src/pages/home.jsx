@@ -1,6 +1,9 @@
 import React from "react";
 import { FaTruck, FaUndo, FaHeadset, FaShieldAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { addToCart } from "../features/productslice";
+import { useDispatch } from "react-redux";
 
 // Sample product data
 const categories = [
@@ -49,6 +52,12 @@ const newArrivals = [
 ];
 
 export default function Home() {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -59,20 +68,43 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/20"></div>
-        <div className="relative h-full container mx-auto px-4 flex items-center z-10">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="relative h-full container mx-auto px-4 flex items-center z-10"
+        >
           <div className="max-w-2xl text-white">
-            <h1 className="text-5xl font-bold mb-4">Step into Greatness</h1>
-            <p className="text-xl mb-8">
-              Discover our new collection of premium footwear for every occasion
-            </p>
-            <Link
-              to="/listofproduct"
-              className="inline-block bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-5xl font-bold mb-4"
             >
-              Shop Now
-            </Link>
+              Step into Greatness
+            </motion.h1>
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-xl mb-8"
+            >
+              Discover our new collection of premium footwear for every occasion
+            </motion.p>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              <Link
+                to="/listofproduct"
+                className="inline-block bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Shop Now
+              </Link>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Features Section */}
@@ -100,8 +132,12 @@ export default function Home() {
               desc: "100% secure checkout",
             },
           ].map((feature, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
               className="flex items-center space-x-4 p-6 bg-white rounded-lg shadow-sm"
             >
               <div className="text-3xl text-blue-600">{feature.icon}</div>
@@ -109,7 +145,7 @@ export default function Home() {
                 <h3 className="font-semibold">{feature.title}</h3>
                 <p className="text-gray-600 text-sm">{feature.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -117,13 +153,23 @@ export default function Home() {
       {/* Categories Section */}
       <div className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-center mb-12"
+          >
             Shop by Category
-          </h2>
+          </motion.h2>
           <div className="grid md:grid-cols-3 gap-8">
             {categories.map((category, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02 }}
                 className="relative group overflow-hidden rounded-lg h-80"
               >
                 <img
@@ -145,7 +191,7 @@ export default function Home() {
                     Shop Now
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -154,11 +200,23 @@ export default function Home() {
       {/* New Arrivals Section */}
       <div className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">New Arrivals</h2>
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-center mb-12"
+          >
+            New Arrivals
+          </motion.h2>
           <div className="grid md:grid-cols-4 gap-8">
-            {newArrivals.map((product) => (
-              <div
+            {newArrivals.map((product, index) => (
+              <motion.div
                 key={product.id}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
                 className="bg-white rounded-lg shadow-sm overflow-hidden group"
               >
                 <div className="relative aspect-square overflow-hidden">
@@ -176,18 +234,26 @@ export default function Home() {
                 <div className="p-4">
                   <h3 className="font-semibold mb-2">{product.title}</h3>
                   <p className="text-gray-600 mb-2">${product.price}</p>
-                  <button className="w-full bg-gray-900 text-white py-2 rounded-full hover:bg-gray-800 transition-colors">
+                  <button
+                    className="w-full bg-gray-900 text-white py-2 rounded-full hover:bg-gray-800 transition-colors"
+                    onClick={() => handleAddToCart(product)}
+                  >
                     Add to Cart
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </div>
 
       {/* Newsletter */}
-      <div className="py-16 bg-gray-900 text-white mb-20">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="py-16 bg-gray-900 text-white mb-20"
+      >
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Join Our Newsletter</h2>
           <p className="mb-8 text-gray-300">
@@ -204,7 +270,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

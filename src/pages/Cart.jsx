@@ -9,6 +9,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaShoppingBag } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -38,9 +39,35 @@ export default function Cart() {
   const shipping = subtotal > 5000 ? 0 : 299;
   const total = subtotal + shipping;
 
+  // Add animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="min-h-screen bg-gray-50 flex items-center justify-center p-4"
+      >
         <div className="text-center">
           <FaShoppingBag className="w-24 h-24 mx-auto text-gray-300 mb-6" />
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
@@ -57,15 +84,23 @@ export default function Cart() {
             Continue Shopping
           </Link>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen bg-gray-50 py-12"
+    >
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        {/* Header with animation */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="flex items-center justify-between mb-8"
+        >
           <h2 className="text-3xl font-bold text-gray-900">Shopping Cart</h2>
           <Link
             to="/listofproduct"
@@ -74,14 +109,21 @@ export default function Cart() {
             <FaArrowLeft className="mr-2" />
             Continue Shopping
           </Link>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Cart Items with stagger animation */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-2 space-y-4"
+          >
             {cart.map((item) => (
-              <div
+              <motion.div
                 key={item.id}
+                variants={itemVariants}
+                layout
                 className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow"
               >
                 <div className="p-4 flex items-center">
@@ -132,12 +174,17 @@ export default function Cart() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Order Summary */}
-          <div className="lg:col-span-1">
+          {/* Order Summary with animation */}
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-1"
+          >
             <div className="bg-white rounded-xl shadow-sm p-6 sticky top-4">
               <h3 className="text-xl font-semibold mb-6">Order Summary</h3>
 
@@ -168,9 +215,9 @@ export default function Cart() {
                 </p>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

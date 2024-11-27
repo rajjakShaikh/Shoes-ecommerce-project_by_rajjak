@@ -75,6 +75,9 @@ export default function Header() {
               <Link to="/addproduct" className="nav-link">
                 Add Product
               </Link>
+              <Link to="/contact" className="nav-link">
+                Contact
+              </Link>
               <Link to="/cart" className="relative p-2">
                 <FaShoppingCart className="text-2xl text-gray-700 hover:text-gray-900" />
                 {cartCount > 0 && (

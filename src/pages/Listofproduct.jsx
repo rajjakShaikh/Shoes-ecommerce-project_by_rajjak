@@ -34,25 +34,29 @@ export default function Listofproduct() {
         {product.map((data) => (
           <div
             key={data.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105"
+            className="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 flex flex-col h-full"
           >
             <img
               src={data.image}
               alt={data.name}
               className="w-full h-48 object-cover"
             />
-            <div className="p-4">
+            <div className="p-4 flex flex-col flex-grow">
               <h2 className="text-lg font-semibold text-gray-700">
                 {data.name}
               </h2>
               <p className="text-sm text-gray-500 mb-4">{data.description}</p>
-              <p className="text-lg font-bold text-indigo-600">₹{data.price}</p>
-              <button
-                className="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300"
-                onClick={() => handleAddToCart(data)}
-              >
-                Add to Cart
-              </button>
+              <div className="mt-auto">
+                <p className="text-lg font-bold text-indigo-600">
+                  ₹{data.price}
+                </p>
+                <button
+                  className="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300"
+                  onClick={() => handleAddToCart(data)}
+                >
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
         ))}

@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import { useEffect } from "react";
 import { loadCartFromLocalStorage } from "./features/productslice";
 import { useDispatch } from "react-redux";
+import Contactpage from "./pages/Contactpage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/addproduct" element={<AddProduct />} />
           <Route exact path="/listofproduct" element={<Listofproduct />} />
           <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/contact" element={<Contactpage />} />
         </Route>
       </Routes>
     </BrowserRouter>
