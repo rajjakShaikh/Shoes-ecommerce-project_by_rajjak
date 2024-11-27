@@ -1,0 +1,158 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "Nike Air Max Ultra Comfort",
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+      "price": 8499,
+      "category": "Running",
+      "brand": "Nike",
+      "description": "Premium running shoes with ultra-comfort technology",
+      "rating": 4.5,
+      "inStock": true
+    },
+    {
+      "id": 2,
+      "name": "Adidas Originals Classic",
+      "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772",
+      "price": 6999,
+      "category": "Casual",
+      "brand": "Adidas",
+      "description": "Classic sneakers for everyday style",
+      "rating": 4.3,
+      "inStock": true
+    },
+    {
+      "id": 3,
+      "name": "Puma RS-X Urban Sport",
+      "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa",
+      "price": 5999,
+      "category": "Sport",
+      "brand": "Puma",
+      "description": "Modern sport shoes with retro design",
+      "rating": 4.2,
+      "inStock": true
+    },
+    {
+      "id": 4,
+      "name": "Nike Jordan Retro High",
+      "image": "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb",
+      "price": 12999,
+      "category": "Basketball",
+      "brand": "Nike",
+      "description": "Iconic basketball shoes for street style",
+      "rating": 4.7,
+      "inStock": true
+    },
+    {
+      "id": 5,
+      "name": "Reebok Classic Runner",
+      "image": "https://images.unsplash.com/photo-1605348532760-6753d2c43329",
+      "price": 4999,
+      "category": "Running",
+      "brand": "Reebok",
+      "description": "Comfortable running shoes for daily use",
+      "rating": 4.1,
+      "inStock": true
+    },
+    {
+      "id": 6,
+      "name": "Adidas Ultraboost DNA",
+      "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
+      "price": 15999,
+      "category": "Running",
+      "brand": "Adidas",
+      "description": "Premium running shoes with boost technology",
+      "rating": 4.8,
+      "inStock": true
+    },
+    {
+      "id": 7,
+      "name": "Puma Suede Classic",
+      "image": "https://images.unsplash.com/photo-1560769629-975ec94e6a86",
+      "price": 4499,
+      "category": "Casual",
+      "brand": "Puma",
+      "description": "Timeless casual sneakers",
+      "rating": 4.4,
+      "inStock": true
+    },
+    {
+      "id": 8,
+      "name": "Nike Air Zoom Elite",
+      "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a",
+      "price": 9999,
+      "category": "Running",
+      "brand": "Nike",
+      "description": "Professional running shoes with zoom air technology",
+      "rating": 4.6,
+      "inStock": true
+    },
+    {
+      "id": 9,
+      "name": "Adidas NMD Urban",
+      "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5",
+      "price": 11999,
+      "category": "Lifestyle",
+      "brand": "Adidas",
+      "description": "Modern lifestyle shoes with boost cushioning",
+      "rating": 4.5,
+      "inStock": true
+    },
+    {
+      "id": 10,
+      "name": "Reebok Workout Plus",
+      "image": "https://images.unsplash.com/photo-1543508282-6319a3e2621f",
+      "price": 5499,
+      "category": "Training",
+      "brand": "Reebok",
+      "description": "Versatile training shoes for gym and casual wear",
+      "rating": 4.3,
+      "inStock": true
+    },
+    {
+      "id": 11,
+      "name": "Nike SB Skate Pro",
+      "image": "https://images.unsplash.com/photo-1556906781-9a412961c28c",
+      "price": 7499,
+      "category": "Skateboarding",
+      "brand": "Nike",
+      "description": "Professional skateboarding shoes with extra durability",
+      "rating": 4.4,
+      "inStock": true
+    },
+    {
+      "id": 12,
+      "name": "Puma Future Rider",
+      "image": "https://images.unsplash.com/photo-1460353581641-37baddab0fa2",
+      "price": 6499,
+      "category": "Casual",
+      "brand": "Puma",
+      "description": "Retro-inspired casual sneakers",
+      "rating": 4.2,
+      "inStock": true
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Running",
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+    },
+    {
+      "id": 2,
+      "name": "Casual",
+      "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772"
+    },
+    {
+      "id": 3,
+      "name": "Sport",
+      "image": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa"
+    }
+  ],
+  "featured": {
+    "heroImage": "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+    "title": "Step into Greatness",
+    "description": "Discover our new collection of premium footwear for every occasion"
+  }
+}
