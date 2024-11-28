@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,28 +32,25 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link
-            to="/"
-            className="text-2xl font-bold text-gray-800 min-w-[120px]"
-          >
-            ShoeStore
+          <Link to="/" className="flex items-center min-w-[180px]">
+            <motion.div whileHover={{ scale: 1.05 }} className="relative">
+              <span className="text-3xl tracking-tight whitespace-nowrap font-extrabold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Kick
+                <span className="inline-block transform -rotate-6 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  It
+                </span>
+                <span className="inline-block bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  Up
+                </span>
+                <span className="absolute -top-1 -right-2 text-xs text-pink-500">
+                  ®
+                </span>
+              </span>
+              <span className="absolute -bottom-2 left-0 text-[10px] text-gray-600 font-medium tracking-wider whitespace-nowrap">
+                PREMIUM FOOTWEAR
+              </span>
+            </motion.div>
           </Link>
-
-          {/* Center Search Bar */}
-          <div className="hidden md:flex flex-1 justify-center max-w-2xl px-8">
-            <div className="relative w-full">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
-                className="w-full px-4 py-2.5 rounded-full border border-gray-300 focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200"
-              />
-              <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                <FaSearch size={18} />
-              </button>
-            </div>
-          </div>
 
           {/* Right Side Navigation */}
           <div className="flex items-center justify-end min-w-[120px]">
@@ -66,22 +64,37 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="nav-link">
-                Home
+              <Link to="/" className="nav-link group">
+                <span className="relative">
+                  Home
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                </span>
               </Link>
-              <Link to="/listofproduct" className="nav-link">
-                Products
+              <Link to="/listofproduct" className="nav-link group">
+                <span className="relative">
+                  Products
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                </span>
               </Link>
-              <Link to="/addproduct" className="nav-link">
-                Add Product
+              <Link to="/addproduct" className="nav-link group">
+                <span className="relative">
+                  Add Product
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                </span>
               </Link>
-              <Link to="/contact" className="nav-link">
-                Contact
+              <Link to="/contact" className="nav-link group">
+                <span className="relative">
+                  Contact
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                </span>
               </Link>
-              <Link to="/cart" className="relative p-2">
+              <Link
+                to="/cart"
+                className="relative p-2 transition-transform duration-300 hover:scale-110"
+              >
                 <FaShoppingCart className="text-2xl text-gray-700 hover:text-gray-900" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs animate-pulse">
                     {cartCount}
                   </span>
                 )}

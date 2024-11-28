@@ -27,14 +27,15 @@ const productSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const existingItem = state.cart.find(
-        (item) => item.id === action.payload.id
+        (item) =>
+          item.id === action.payload.id && item.size === action.payload.size
       );
       if (existingItem) {
-        // Increment the quantity
-        existingItem.quantity += 1;
+        // Add the new quantity to existing quantity
+        existingItem.quantity += action.payload.quantity;
       } else {
-        // Add a new item with quantity 1
-        state.cart.push({ ...action.payload, quantity: 1 });
+        // Add new item with the specified quantity
+        state.cart.push({ ...action.payload });
       }
     },
     updateQuantity: (state, action) => {

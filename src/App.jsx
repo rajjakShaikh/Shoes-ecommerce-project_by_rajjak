@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import { loadCartFromLocalStorage } from "./features/productslice";
 import { useDispatch } from "react-redux";
 import Contactpage from "./pages/Contactpage";
+import ProductDetails from "./pages/ProductDetails";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,17 +20,21 @@ function App() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter future={{ v7_startTransition: true }}>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/addproduct" element={<AddProduct />} />
-          <Route exact path="/listofproduct" element={<Listofproduct />} />
-          <Route exact path="/cart" element={<Cart />} />
-          <Route exact path="/contact" element={<Contactpage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <ToastContainer />
+      <BrowserRouter future={{ v7_startTransition: true }}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/addproduct" element={<AddProduct />} />
+            <Route exact path="/listofproduct" element={<Listofproduct />} />
+            <Route exact path="/product/:id" element={<ProductDetails />} />
+            <Route exact path="/cart" element={<Cart />} />
+            <Route exact path="/contact" element={<Contactpage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

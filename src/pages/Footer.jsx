@@ -16,8 +16,9 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold text-white mb-4">About Us</h3>
             <p className="text-sm">
-              ShoeStore is your go-to destination for the latest in footwear
-              fashion. We offer a wide range of styles for every occasion.
+              Kit It Up is your premier destination for the latest in footwear
+              fashion and lifestyle. We bring you curated collections that help
+              you express your unique style.
             </p>
           </div>
 
@@ -80,10 +81,11 @@ export default function Footer() {
           {/* Newsletter & Social Media */}
           <div>
             <h3 className="text-xl font-bold text-white mb-4">
-              Stay Connected
+              Join the Kit It Up Community
             </h3>
             <p className="text-sm mb-4">
-              Subscribe to our newsletter for the latest updates and offers.
+              Subscribe to our newsletter for exclusive drops and special
+              offers.
             </p>
             <div className="flex mb-4">
               <input
@@ -112,9 +114,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-gray-700 pt-6 text-center text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} ShoeStore. All rights reserved.
+        <div className="mt-12 border-t border-gray-700 pt-6 text-center">
+          <div className="mb-4">
+            <span className="text-2xl font-bold">
+              Kit <span className="text-blue-400">It Up</span>
+            </span>
+          </div>
+          <p className="text-sm">
+            &copy; {new Date().getFullYear()} Kit It Up. All rights reserved.
           </p>
         </div>
       </div>

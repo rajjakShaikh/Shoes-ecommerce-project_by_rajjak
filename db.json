@@ -131,6 +131,72 @@
       "description": "Retro-inspired casual sneakers",
       "rating": 4.2,
       "inStock": true
+    },
+    {
+      "id": 13,
+      "name": "Under Armour HOVR Phantom",
+      "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
+      "price": 13999,
+      "category": "Running",
+      "brand": "Under Armour",
+      "description": "Smart running shoes with connected fitness tracking",
+      "rating": 4.6,
+      "inStock": true
+    },
+    {
+      "id": 14,
+      "name": "New Balance 574 Classic",
+      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570",
+      "price": 7999,
+      "category": "Lifestyle",
+      "brand": "New Balance",
+      "description": "Iconic lifestyle sneakers with premium comfort",
+      "rating": 4.4,
+      "inStock": true
+    },
+    {
+      "id": 15,
+      "name": "Asics Gel-Nimbus",
+      "image": "https://images.unsplash.com/photo-1562183241-b937e95585b6",
+      "price": 12499,
+      "category": "Running",
+      "brand": "Asics",
+      "description": "Long-distance running shoes with gel cushioning",
+      "rating": 4.7,
+      "inStock": true
+    },
+    {
+      "id": 16,
+      "name": "Vans Old Skool Pro",
+      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77",
+      "price": 5999,
+      "category": "Skateboarding",
+      "brand": "Vans",
+      "description": "Classic skateboarding shoes with enhanced durability",
+      "rating": 4.5,
+      "inStock": true
+    },
+    {
+      "id": 17,
+      "name": "Converse Chuck 70 Hi",
+      "image": "https://images.unsplash.com/photo-1494496195158-c3becb4f2475",
+      "price": 6999,
+      "category": "Casual",
+      "brand": "Converse",
+      "description": "Premium version of the classic Chuck Taylor",
+      "rating": 4.3,
+      "inStock": true
+    },
+    {
+      "id": 18,
+      "name": "Brooks Ghost 14",
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+      "price": 11999,
+      "category": "Running",
+      "brand": "Brooks",
+      "description": "Neutral running shoes with soft cushioning",
+      "rating": 4.8,
+      "inStock": true
     }
   ],
   "categories": [

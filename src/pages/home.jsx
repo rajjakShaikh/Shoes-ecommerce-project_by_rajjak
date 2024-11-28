@@ -1,5 +1,14 @@
-import React from "react";
-import { FaTruck, FaUndo, FaHeadset, FaShieldAlt } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import {
+  FaTruck,
+  FaUndo,
+  FaHeadset,
+  FaShieldAlt,
+  FaInstagram,
+  FaStar,
+  FaPlay,
+  FaArrowRight,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { addToCart } from "../features/productslice";
@@ -51,8 +60,35 @@ const newArrivals = [
   },
 ];
 
+const brandHighlights = [
+  { number: "50K+", label: "Happy Customers" },
+  { number: "300+", label: "Shoe Models" },
+  { number: "25+", label: "Countries Served" },
+  { number: "100%", label: "Authentic Products" },
+];
+
+const instagramPosts = [
+  {
+    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772",
+    likes: "2.5k",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+    likes: "1.8k",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb",
+    likes: "3.2k",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa",
+    likes: "2.1k",
+  },
+];
+
 export default function Home() {
   const dispatch = useDispatch();
+  const [videoModal, setVideoModal] = useState(false);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -108,7 +144,7 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <div className="py-16 bg-gray-50">
+      <div className="py-16 bg-gray-200">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
           {[
             {
@@ -185,7 +221,7 @@ export default function Home() {
                     {category.title}
                   </h3>
                   <Link
-                    to="/listofproduct"
+                    to={`/listofproduct?category=${category.title.toLowerCase()}`}
                     className="text-white underline hover:no-underline"
                   >
                     Shop Now
@@ -243,6 +279,144 @@ export default function Home() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Brand Story Video Section */}
+      <div className="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl font-bold mb-6">
+                Our Journey to Excellence
+              </h2>
+              <p className="text-gray-300 mb-8">
+                From humble beginnings to becoming a global footwear leader, our
+                passion for quality and innovation remains unchanged. Every pair
+                tells a story of craftsmanship and dedication.
+              </p>
+              <button
+                onClick={() => setVideoModal(true)}
+                className="flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <FaPlay /> Watch Our Story
+              </button>
+            </motion.div>
+            <motion.div
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1556906781-9a412961c28c"
+                alt="Brand Story"
+                className="rounded-lg shadow-2xl"
+              />
+              <div className="absolute inset-0 bg-black/40 rounded-lg flex items-center justify-center">
+                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                  <FaPlay className="text-gray-900 text-2xl ml-1" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Numbers/Stats Section */}
+      <div className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {brandHighlights.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <h3 className="text-4xl font-bold text-gray-900 mb-2">
+                  {stat.number}
+                </h3>
+                <p className="text-gray-600">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Instagram Feed Section */}
+      <div className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-12">
+            <motion.h2
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold"
+            >
+              Follow Us on Instagram
+            </motion.h2>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+            >
+              @yourbrand <FaArrowRight />
+            </a>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {instagramPosts.map((post, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="relative group overflow-hidden rounded-lg aspect-square"
+              >
+                <img
+                  src={post.image}
+                  alt={`Instagram post ${index + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="flex items-center gap-2 text-white">
+                    <FaInstagram className="text-2xl" />
+                    <span>{post.likes} likes</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Trust Badges Section */}
+      <div className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-70">
+            {["Nike", "Adidas", "Puma", "New Balance", "Under Armour"].map(
+              (brand, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-2xl font-bold text-gray-400"
+                >
+                  {brand}
+                </motion.div>
+              )
+            )}
           </div>
         </div>
       </div>
