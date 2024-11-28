@@ -11,6 +11,9 @@ import Contactpage from "./pages/Contactpage";
 import ProductDetails from "./pages/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Wishlist from "./pages/Wishlist";
+import Blog from "./pages/Blog";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +34,9 @@ function App() {
             <Route exact path="/product/:id" element={<ProductDetails />} />
             <Route exact path="/cart" element={<Cart />} />
             <Route exact path="/contact" element={<Contactpage />} />
+            <Route exact path="/wishlist" element={<Wishlist />} />
+            <Route exact path="/blog" element={<Blog />} />
+            <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
           </Route>
         </Routes>
       </BrowserRouter>

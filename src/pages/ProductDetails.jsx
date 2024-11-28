@@ -43,7 +43,7 @@ export default function ProductDetails() {
     if (!selectedSize) {
       toast.error("Please select a size", {
         position: "top-center",
-        autoClose: 1500,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -71,7 +71,7 @@ export default function ProductDetails() {
       dispatch(addToCart(cartItem));
       toast.success(`${product.name} added to cart!`, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -82,7 +82,7 @@ export default function ProductDetails() {
       console.error("Error in handleAddToCart:", error);
       toast.error("Failed to add item to cart", {
         position: "top-center",
-        autoClose: 1500,
+        autoClose: 1000,
       });
     }
   };

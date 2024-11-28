@@ -8,11 +8,13 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { cart } = useSelector((state) => state.product);
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartCount = cart.reduce(
+    (total, item) => total + (item.quantity || 1),
+    0
+  );
 
   return (
     <header className="w-full bg-white border-b shadow-sm">
-      {/* Announcement Bar */}
       <div className="bg-gray-900 text-white py-2.5">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center space-x-4">
@@ -76,15 +78,27 @@ export default function Header() {
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
                 </span>
               </Link>
-              <Link to="/addproduct" className="nav-link group">
+              {/* <Link to="/addproduct" className="nav-link group">
                 <span className="relative">
                   Add Product
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
                 </span>
-              </Link>
+              </Link> */}
               <Link to="/contact" className="nav-link group">
                 <span className="relative">
                   Contact
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                </span>
+              </Link>
+              <Link to="/wishlist" className="nav-link group">
+                <span className="relative">
+                  Wishlist
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                </span>
+              </Link>
+              <Link to="/blog" className="nav-link group">
+                <span className="relative">
+                  Style Guide
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
                 </span>
               </Link>

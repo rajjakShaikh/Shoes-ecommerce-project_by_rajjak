@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, ShowProducts } from "../features/productSlice";
+import {
+  addToCart,
+  ShowProducts,
+  addToWishlist,
+  removeFromWishlist,
+} from "../features/productSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useSearchParams } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 
 // eslint-disable react-hooks/exhaustive-deps
 
 export default function Listofproduct() {
   const dispatch = useDispatch();
-  const { product, isLoading, isError } = useSelector((state) => state.product);
+  const { product, isLoading, isError, wishlist } = useSelector(
+    (state) => state.product
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [searchParams] = useSearchParams();
@@ -33,13 +41,24 @@ export default function Listofproduct() {
     dispatch(addToCart(product));
     toast.success(`${product.name} added to cart!`, {
       position: "top-right",
-      autoClose: 3000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
     });
+  };
+
+  const handleWishlistToggle = (product) => {
+    const isInWishlist = wishlist.some((item) => item.id === product.id);
+    if (isInWishlist) {
+      dispatch(removeFromWishlist(product.id));
+      toast.info("Removed from wishlist");
+    } else {
+      dispatch(addToWishlist(product));
+      toast.success("Added to wishlist");
+    }
   };
 
   // Get unique categories from products
@@ -147,35 +166,47 @@ export default function Listofproduct() {
                   key={data.id}
                   className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full"
                 >
-                  <Link
-                    to={`/product/${data.id.toString()}`}
-                    className="flex-1 flex flex-col"
-                  >
-                    <div className="relative group">
+                  <div className="relative group">
+                    <Link
+                      to={`/product/${data.id.toString()}`}
+                      className="flex-1 flex flex-col"
+                    >
                       <img
                         src={data.image}
                         alt={data.name}
                         className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <span className="text-xs text-indigo-600 font-semibold uppercase tracking-wider mb-2">
-                        {data.category}
-                      </span>
-                      <h2 className="text-xl font-bold text-gray-800 mb-2">
-                        {data.name}
-                      </h2>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                        {data.description}
+                    </Link>
+                    <button
+                      onClick={() => handleWishlistToggle(data)}
+                      className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors z-10"
+                    >
+                      <FaHeart
+                        className={`${
+                          wishlist.some((item) => item.id === data.id)
+                            ? "text-red-500"
+                            : "text-gray-400"
+                        } transition-colors`}
+                      />
+                    </button>
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <span className="text-xs text-indigo-600 font-semibold uppercase tracking-wider mb-2">
+                      {data.category}
+                    </span>
+                    <h2 className="text-xl font-bold text-gray-800 mb-2">
+                      {data.name}
+                    </h2>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                      {data.description}
+                    </p>
+                    <div className="mt-auto">
+                      <p className="text-2xl font-bold text-indigo-600">
+                        ₹{data.price}
                       </p>
-                      <div className="mt-auto">
-                        <p className="text-2xl font-bold text-indigo-600">
-                          ₹{data.price}
-                        </p>
-                      </div>
                     </div>
-                  </Link>
+                  </div>
                   <div className="px-6 pb-6">
                     <button
                       className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 flex items-center justify-center gap-2"

@@ -23,6 +23,7 @@ const productSlice = createSlice({
     cart: [],
     isLoading: false,
     isError: false,
+    wishlist: [],
   },
   reducers: {
     addToCart: (state, action) => {
@@ -32,10 +33,14 @@ const productSlice = createSlice({
       );
       if (existingItem) {
         // Add the new quantity to existing quantity
-        existingItem.quantity += action.payload.quantity;
+        existingItem.quantity =
+          (existingItem.quantity || 1) + (action.payload.quantity || 1);
       } else {
-        // Add new item with the specified quantity
-        state.cart.push({ ...action.payload });
+        // Add new item with the specified quantity or default to 1
+        state.cart.push({
+          ...action.payload,
+          quantity: action.payload.quantity || 1,
+        });
       }
     },
     updateQuantity: (state, action) => {
@@ -53,7 +58,6 @@ const productSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      // Filter out the removed item by id
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
     },
     loadCartFromLocalStorage: (state) => {
@@ -61,6 +65,19 @@ const productSlice = createSlice({
       if (storedCart) {
         state.cart = JSON.parse(storedCart);
       }
+    },
+    addToWishlist: (state, action) => {
+      const exists = state.wishlist.find(
+        (item) => item.id === action.payload.id
+      );
+      if (!exists) {
+        state.wishlist.push(action.payload);
+      }
+    },
+    removeFromWishlist: (state, action) => {
+      state.wishlist = state.wishlist.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
   extraReducers: (builder) => {
@@ -109,5 +126,7 @@ export const {
   removeFromCart,
   loadCartFromLocalStorage,
   updateQuantity,
+  addToWishlist,
+  removeFromWishlist,
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -86,9 +86,36 @@ const instagramPosts = [
   },
 ];
 
+const bannerSlides = [
+  {
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+    title: "Step into Greatness",
+    description:
+      "Discover our new collection of premium footwear for every occasion",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2",
+    title: "Premium Collection",
+    description: "Experience comfort and style with our exclusive range",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1556906781-9a412961c28c",
+    title: "New Season Arrivals",
+    description: "Explore the latest trends in athletic and casual footwear",
+  },
+];
+
 export default function Home() {
   const dispatch = useDispatch();
   const [videoModal, setVideoModal] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -97,50 +124,71 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[600px]">
-        <img
-          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-          alt="Hero"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/20"></div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="relative h-full container mx-auto px-4 flex items-center z-10"
-        >
-          <div className="max-w-2xl text-white">
-            <motion.h1
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl font-bold mb-4"
-            >
-              Step into Greatness
-            </motion.h1>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-xl mb-8"
-            >
-              Discover our new collection of premium footwear for every occasion
-            </motion.p>
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              <Link
-                to="/listofproduct"
-                className="inline-block bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-              >
-                Shop Now
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
+      <div className="relative h-[600px] overflow-hidden">
+        {bannerSlides.map((slide, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: currentSlide === index ? 1 : 0,
+              zIndex: currentSlide === index ? 1 : 0,
+            }}
+            transition={{ duration: 0.7 }}
+            className="absolute inset-0"
+          >
+            <img
+              src={slide.image}
+              alt={`Hero ${index + 1}`}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/20"></div>
+            <div className="relative h-full container mx-auto px-4 flex items-center z-10">
+              <div className="max-w-2xl text-white">
+                <motion.h1
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                  className="text-5xl font-bold mb-4"
+                >
+                  {slide.title}
+                </motion.h1>
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                  className="text-xl mb-8"
+                >
+                  {slide.description}
+                </motion.p>
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                >
+                  <Link
+                    to="/listofproduct"
+                    className="inline-block bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+                  >
+                    Shop Now
+                  </Link>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Carousel Navigation Dots */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          {bannerSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                currentSlide === index ? "bg-white" : "bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Features Section */}
