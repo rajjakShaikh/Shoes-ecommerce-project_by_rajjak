@@ -74,7 +74,10 @@ export default function Blog() {
         ].map((category) => (
           <button
             key={category}
+            role="button"
+            tabIndex={0}
             className="px-4 py-2 bg-white rounded-full shadow-md hover:bg-indigo-50 transition-colors whitespace-nowrap"
+            aria-label={`Filter by ${category}`}
           >
             {category}
           </button>

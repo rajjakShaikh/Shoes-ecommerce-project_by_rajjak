@@ -1,39 +1,70 @@
-import React, { useState } from "react";
-import { FaShoppingCart, FaSearch, FaTimes } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const { cart } = useSelector((state) => state.product);
+  const [getloggeduserName, setgetloggeduserName] = useState("");
   const cartCount = cart.reduce(
     (total, item) => total + (item.quantity || 1),
     0
   );
 
+  const handleLogout = () => {
+    localStorage.removeItem("hasloggedin");
+    navigate("/login");
+  };
+  useEffect(() => {
+    const loggeduserNameShow = JSON.parse(localStorage.getItem("userSignup"));
+    setgetloggeduserName(loggeduserNameShow.email);
+    console.log(loggeduserNameShow.email);
+  }, []);
+
   return (
-    <header className="w-full bg-white border-b shadow-sm">
-      <div className="bg-gray-900 text-white py-2.5">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center space-x-4">
-            <span className="h-4 w-px bg-gray-600 hidden sm:inline"></span>
-            <p className="text-sm font-medium text-center flex items-center gap-2">
-              <span className="hidden sm:inline">🚚</span>
-              Free shipping on orders over $50
-              <span className="hidden sm:inline">|</span>
-              <span className="text-blue-400">Express Delivery Available</span>
+    <header className="w-full bg-white border-b">
+      {/* Enhanced top banner with gradient */}
+      <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-3">
+        <div className="container mx-auto px-4 flex justify-between">
+          <div className="flex items-center">
+            <p className="text-sm font-medium">
+              Welcome,{" "}
+              <span className="text-blue-400">{getloggeduserName}</span>
             </p>
-            <span className="h-4 w-px bg-gray-600 hidden sm:inline"></span>
+            <div className="flex items-center space-x-4 ml-3">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                onClick={handleLogout}
+              >
+                <RiLogoutCircleLine className="text-2xl  text-white hover:text-gray-900" />
+              </motion.button>
+            </div>
+          </div>
+          <div className="flex items-center justify-center space-x-4">
+            <div className="hidden sm:flex items-center space-x-4">
+              <span className="text-blue-400">🚚</span>
+              <p className="text-sm font-medium">
+                Free shipping on orders over $50
+                <span className="mx-2">|</span>
+                <span className="text-blue-400 hover:text-blue-300 transition-colors cursor-pointer">
+                  Express Delivery Available
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Main Header Content */}
-      <div className="container mx-auto px-4">
+      {/* Enhanced main header */}
+      <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+          {/* Enhanced Logo with animation */}
           <Link to="/" className="flex items-center min-w-[180px]">
             <motion.div whileHover={{ scale: 1.05 }} className="relative">
               <span className="text-3xl tracking-tight whitespace-nowrap font-extrabold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -54,135 +85,60 @@ export default function Header() {
             </motion.div>
           </Link>
 
-          {/* Right Side Navigation */}
-          <div className="flex items-center justify-end min-w-[120px]">
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden text-gray-600 hover:text-gray-800 p-2"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <FaTimes size={24} /> : "☰"}
-            </button>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="nav-link group">
-                <span className="relative">
-                  Home
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
-                </span>
-              </Link>
-              <Link to="/listofproduct" className="nav-link group">
-                <span className="relative">
-                  Products
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
-                </span>
-              </Link>
-              {/* <Link to="/addproduct" className="nav-link group">
-                <span className="relative">
-                  Add Product
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
-                </span>
-              </Link> */}
-              <Link to="/contact" className="nav-link group">
-                <span className="relative">
-                  Contact
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
-                </span>
-              </Link>
-              <Link to="/wishlist" className="nav-link group">
-                <span className="relative">
-                  Wishlist
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
-                </span>
-              </Link>
-              <Link to="/blog" className="nav-link group">
-                <span className="relative">
-                  Style Guide
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
-                </span>
-              </Link>
-              <Link
-                to="/cart"
-                className="relative p-2 transition-transform duration-300 hover:scale-110"
+          {/* Enhanced Desktop Navigation */}
+          <nav className="hidden md:flex  items-center space-x-8">
+            {[
+              { path: "/", label: "Home" },
+              { path: "/listofproduct", label: "Products" },
+              { path: "/contact", label: "Contact" },
+              { path: "/wishlist", label: "Wishlist" },
+              { path: "/blog", label: "Style Guide" },
+            ].map(({ path, label, icon }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  `nav-link group flex items-center gap-2 font-bold py-2 rounded-full transition-all duration-300 hover:bg-gray-100 ${
+                    isActive
+                      ? "text-transparent bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text font-semibold"
+                      : ""
+                  }`
+                }
               >
-                <FaShoppingCart className="text-2xl text-gray-700 hover:text-gray-900" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs animate-pulse">
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
-            </nav>
-          </div>
+                <span className="text-sm">{icon}</span>
+                <span className="relative">
+                  {label}
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 transform scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                </span>
+              </NavLink>
+            ))}
+
+            {/* Enhanced action buttons */}
+            <Link
+              to="/cart"
+              className="relative p-2 rounded-full hover:bg-gray-100 transition-colors"
+            >
+              <FaShoppingCart className="text-2xl text-gray-700 hover:text-gray-900" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs animate-bounce">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </nav>
         </div>
       </div>
 
-      {/* Mobile Navigation Overlay */}
+      {/* Enhanced Mobile Navigation */}
       <nav
-        className={`fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform ${
+        className={`fixed inset-y-0 right-0 w-72 bg-white shadow-2xl transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out md:hidden z-50`}
-      >
-        <div className="p-6 space-y-6">
-          {/* Mobile Search */}
-          <div className="relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search products..."
-              className="w-full px-4 py-2.5 rounded-full border border-gray-300 focus:border-gray-500 focus:outline-none"
-            />
-            <FaSearch className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" />
-          </div>
-
-          {/* Mobile Menu Items */}
-          <ul className="space-y-4">
-            <li>
-              <Link to="/" className="mobile-nav-link">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/listofproduct" className="mobile-nav-link">
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/addproduct" className="mobile-nav-link">
-                Add Product
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/cart"
-                className="mobile-nav-link flex items-center justify-between"
-              >
-                <span>Cart</span>
-                {cartCount > 0 && (
-                  <span className="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-40"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+        } transition-transform duration-300 ease-in-out md:hidden z-50 rounded-l-2xl`}
+      ></nav>
     </header>
   );
 }
 
-// Add these styles to your global CSS
 const styles = `
   .nav-link {
     @apply text-gray-600 hover:text-gray-900 font-medium transition-colors;

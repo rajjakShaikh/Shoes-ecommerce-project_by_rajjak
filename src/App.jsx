@@ -14,6 +14,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Wishlist from "./pages/Wishlist";
 import Blog from "./pages/Blog";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import SignupPage from "./pages/signupPage";
+import LoginPage from "./pages/loginpage";
+import ProtectedRouting from "./pages/services/protectedRouting";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,17 +31,25 @@ function App() {
       <ToastContainer />
       <BrowserRouter future={{ v7_startTransition: true }}>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/addproduct" element={<AddProduct />} />
-            <Route exact path="/listofproduct" element={<Listofproduct />} />
-            <Route exact path="/product/:id" element={<ProductDetails />} />
-            <Route exact path="/cart" element={<Cart />} />
-            <Route exact path="/contact" element={<Contactpage />} />
-            <Route exact path="/wishlist" element={<Wishlist />} />
-            <Route exact path="/blog" element={<Blog />} />
-            <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route exact path="/signup" element={<SignupPage />} />
+          <Route exact path="*" element={<NotFound />} />
+
+          <Route exact path="/login" element={<LoginPage />} />
+          {/* protected Routes  */}
+          <Route path="/" element={<ProtectedRouting />}>
+            <Route path="/" element={<Layout />}>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/addproduct" element={<AddProduct />} />
+              <Route exact path="/listofproduct" element={<Listofproduct />} />
+              <Route exact path="/product/:id" element={<ProductDetails />} />
+              <Route exact path="/cart" element={<Cart />} />
+              <Route exact path="/contact" element={<Contactpage />} />
+              <Route exact path="/wishlist" element={<Wishlist />} />
+              <Route exact path="/blog" element={<Blog />} />
+              <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+            </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

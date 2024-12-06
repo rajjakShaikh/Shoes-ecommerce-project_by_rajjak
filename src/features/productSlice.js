@@ -79,6 +79,10 @@ const productSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
+    clearCart: (state) => {
+      state.cart = [];
+      localStorage.removeItem("productCartData");
+    },
   },
   extraReducers: (builder) => {
     // Handle ShowProducts API Call
@@ -128,5 +132,6 @@ export const {
   updateQuantity,
   addToWishlist,
   removeFromWishlist,
+  clearCart,
 } = productSlice.actions;
 export default productSlice.reducer;

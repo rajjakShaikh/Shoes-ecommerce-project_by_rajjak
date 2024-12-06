@@ -1,9 +1,15 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, updateQuantity } from "../features/productSlice";
+import {
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+} from "../features/productSlice";
+
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaTrash, FaMinus, FaPlus } from "react-icons/fa";
+import { initializeRazorpay, createOrder } from "../services/razorpay";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -27,6 +33,50 @@ export default function Cart() {
     const quantity = parseInt(item.quantity) || 1;
     return total + price * quantity;
   }, 0);
+
+  const handleCheckout = async () => {
+    const res = await initializeRazorpay();
+
+    if (!res) {
+      toast.error("Razorpay SDK Failed to load");
+      return;
+    }
+
+    try {
+      const orderData = await createOrder(totalPrice);
+
+      const options = {
+        key: "rzp_live_C7ayx7PaJJkARf",
+        amount: orderData.amount,
+        currency: "INR",
+        name: "KickItUp",
+        description: "Purchase from KickItUp",
+        order_id: orderData.id,
+        handler: function (response) {
+          toast.success("Payment Successful!");
+          console.log("Payment Response:", response);
+          dispatch(clearCart());
+        },
+        prefill: {
+          name: "Customer Name",
+          email: "customer@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Customer Address",
+        },
+        theme: {
+          color: "#4F46E5",
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Error creating order. Please try again.");
+    }
+  };
 
   if (cart.length === 0) {
     return (
@@ -118,7 +168,10 @@ export default function Cart() {
               <span>₹{totalPrice.toFixed(2)}</span>
             </div>
           </div>
-          <button className="w-full bg-indigo-600 text-white py-3 rounded-lg mt-6 hover:bg-indigo-700 transition-colors">
+          <button
+            onClick={handleCheckout}
+            className="w-full bg-indigo-600 text-white py-3 rounded-lg mt-6 hover:bg-indigo-700 transition-colors"
+          >
             Proceed to Checkout
           </button>
         </div>
