@@ -10,7 +10,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const emailRegEx = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
   const SECRET_KEY = "f$%d3L0#tS!aR@";
-  const [error,=] useState(null);
+  const [error, setError] = useState(null);
   const [visible, setVisible] = useState(false);
   // Define the validation schema using Yup
   const validationSchema = yup.object({

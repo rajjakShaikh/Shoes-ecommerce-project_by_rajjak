@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useSearchParams } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import { LineWave } from "react-loader-spinner";
 
 // eslint-disable react-hooks/exhaustive-deps
 
@@ -28,7 +29,17 @@ export default function Listofproduct() {
   }, [dispatch]);
 
   if (isLoading) {
-    return <div className="text-center py-10 text-xl">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LineWave
+          visible={true}
+          height="100"
+          width="100"
+          color="#4fa94d"
+          ariaLabel="line-wave-loading"
+        />
+      </div>
+    );
   }
 
   if (isError) {
