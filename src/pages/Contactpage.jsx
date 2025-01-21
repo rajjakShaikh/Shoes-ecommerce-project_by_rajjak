@@ -34,7 +34,9 @@ function Contactpage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Get in Touch
           </h1>
-          <p className="text-lg text-gray-600">We'd love to hear from you!</p>
+          <p className="text-lg text-gray-600">
+            We&apos;d love to hear from you!
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
