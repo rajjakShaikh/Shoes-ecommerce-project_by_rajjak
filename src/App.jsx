@@ -4,7 +4,7 @@ import Layout from "./pages/Layout";
 import Listofproduct from "./pages/Listofproduct";
 import Cart from "./pages/Cart";
 import { useEffect } from "react";
-import { loadCartFromLocalStorage } from "./features/productslice";
+import { loadCartFromLocalStorage } from "./features/productSlice";
 import { useDispatch } from "react-redux";
 import Contactpage from "./pages/Contactpage";
 import ProductDetails from "./pages/ProductDetails";
