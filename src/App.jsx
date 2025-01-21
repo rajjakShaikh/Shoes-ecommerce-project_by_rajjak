@@ -14,7 +14,7 @@ import Wishlist from "./pages/Wishlist";
 import Blog from "./pages/Blog";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SignupPage from "./pages/signupPage";
-import LoginPage from "./pages/loginpage";
+import LoginPage from "./pages/loginPage";
 import ProtectedRouting from "./pages/services/protectedRouting";
 import NotFound from "./pages/NotFound";
 import AddProduct from "./pages/AddProduct";
