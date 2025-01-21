@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AddProduct from "./pages/Addproduct";
 import Home from "./pages/home";
 import Layout from "./pages/Layout";
 import Listofproduct from "./pages/Listofproduct";
@@ -18,6 +17,7 @@ import SignupPage from "./pages/signupPage";
 import LoginPage from "./pages/loginpage";
 import ProtectedRouting from "./pages/services/protectedRouting";
 import NotFound from "./pages/NotFound";
+import AddProduct from "./pages/AddProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,8 +39,8 @@ function App() {
           <Route path="/" element={<ProtectedRouting />}>
             <Route path="/" element={<Layout />}>
               <Route exact path="/" element={<Home />} />
-              <Route exact path="/addproduct" element={<AddProduct />} />
               <Route exact path="/listofproduct" element={<Listofproduct />} />
+              <Route exact path="/addproduct" element={<AddProduct />} />
               <Route exact path="/product/:id" element={<ProductDetails />} />
               <Route exact path="/cart" element={<Cart />} />
               <Route exact path="/contact" element={<Contactpage />} />
